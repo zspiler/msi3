@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  web: 
+    build: . 
+    ports:
+      - "5000:5000"
+    depends_on: 
+      - db
+      - redis
+  db:
+    image: "mongo:4.2"
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  nginx:
+    image: nginx:latest 
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports: 
+      - 80:80
+    depends_on: 
+      - web
+
+
+  redis:
+    image: "redis:alpine"
+
+volumes:
+  mongo_data:
+      
+  
