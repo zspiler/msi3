@@ -1,3 +1,10 @@
-- mongo
+
 - redis
-- web
+- ingress
+- persistent volume
+- deployment strategies
+- probes
+
+- mongo-svc namesto mongo-svc.default.svc.cluster.local??
+
+k exec app-9c68c4fc9-v6hx5 -- cat app.py

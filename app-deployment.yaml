@@ -9,6 +9,11 @@ spec:
   selector:
     matchLabels:
       app: app
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -16,7 +21,8 @@ spec:
     spec:
       containers:
         - name: web
-          image: localhost:32000/web:v1
+          image: localhost:32000/web:v2
           ports:
             - containerPort: 5000
           imagePullPolicy: Always
+          
