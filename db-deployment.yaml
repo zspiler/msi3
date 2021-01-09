@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:4.2
+        imagePullPolicy: IfNotPresent
+        ports:
+            - containerPort: 27017
