@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app
+  name: app-dep
   labels:
     app: app
 spec:
@@ -21,8 +21,21 @@ spec:
     spec:
       containers:
         - name: web
-          image: localhost:32000/web:v2
+          image: localhost:32000/web:latest
           ports:
             - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /readiness-check
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /liveness-check
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            
           imagePullPolicy: Always
           

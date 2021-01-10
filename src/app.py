@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, abort
 from pymongo import MongoClient
 from flask_caching import Cache
 import socket
@@ -21,6 +21,17 @@ def main():
     db.col.find_one_and_update({}, {'$set': { 'counter': counter }})        
     return render_template('index.html', x=counter, host=hostname) 
 
+@app.route('/readiness-check', methods=['GET', 'POST'])
+def readiness():
+    try:
+        MongoClient("mongodb://mongo-svc.default.svc.cluster.local:27017").server_info() 
+        return f"ready, db: {db}"
+    except:
+        abort(500)
+
+@app.route('/liveness-check', methods=['GET', 'POST'])
+def liveness():
+        return "I am very much alive"
 
 if __name__=='__main__':
     app.run(debug=True, host='0.0.0.0')
