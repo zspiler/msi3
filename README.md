@@ -19,6 +19,11 @@ k apply -f ingress.yaml
 curl app.127.0.0.1.xip.io/about 
 ```
 
+### readiness/liveness probes
+
+For the liveness probe I simply added a new route which returns some text.
+For the readiness probe I test the database connection. 
+
 
 ### Rolling update 
 
