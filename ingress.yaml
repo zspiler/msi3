@@ -11,6 +11,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: app-svc-v2
+            name: app-svc
             port:
               number: 5000
