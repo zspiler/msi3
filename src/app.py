@@ -32,11 +32,13 @@ def readiness():
     except:
         abort(500)
 
-
 @app.route('/liveness', methods=['GET', 'POST'])
 def liveness():
         return "I am very much alive"
 
+@app.route('/about', methods=['GET', 'POST'])
+def about():
+        return f"pod: {hostname}, version: v2\n"
 
 if __name__=='__main__':
     app.run(debug=True, host='0.0.0.0')

@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-dep
+  name: app-dep-v2
   labels:
-    app: app
+    app: app-v2
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: app
+      app: app-v2
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -17,11 +17,11 @@ spec:
   template:
     metadata:
       labels:
-        app: app
+        app: app-v2
     spec:
       containers:
         - name: web
-          image: localhost:32000/web:v1
+          image: localhost:32000/web:v2
           ports:
             - containerPort: 5000
           readinessProbe:

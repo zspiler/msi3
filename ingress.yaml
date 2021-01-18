@@ -4,13 +4,13 @@ metadata:
   name: app-ingress
 spec:
   rules:
-  - host: app.10.152.183.170.xip.io
+  - host: app.127.0.0.1.xip.io
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: app-svc
+            name: app-svc-v2
             port:
               number: 5000
